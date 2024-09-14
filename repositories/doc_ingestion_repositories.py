@@ -25,3 +25,23 @@ class DocumentRepository:
             {"storageIndex": storage_index},
             {"$set": update_fields}
         )
+    def get_collection_names_with_storage_index(self):
+        # Get the list of collections in the database
+
+        # Create a list to hold the results
+        result = []
+
+        # Loop through each collection and retrieve storage index and name
+        collection= self.collection
+            
+        # Find the first document in the collection to extract the storage index and name
+        documents = collection.find({}, {"storageIndex": 1, "name": 1})
+
+            # Loop through all documents in the collection
+        for document in documents:
+            result.append({
+                "storageIndex": document.get("storageIndex", None),
+                "name": document.get("name", None)
+            })
+
+        return result

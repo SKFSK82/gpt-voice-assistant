@@ -193,3 +193,18 @@ def query_documents():
     else:
         return jsonify({"error": "Failed to get response from Ollama."}), ollama_response.status_code
     
+@doc_ingestion_route_blueprint.route('/get-indexes', methods=['GET'])
+def get_indexes():
+    try:
+        # Initialize the repository
+        collection_repository = DocumentRepository()
+        
+        # Retrieve collection names
+        documents = collection_repository.get_collection_names_with_storage_index()
+        
+        # Return the collections as a JSON response
+        return documents, 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
+    
