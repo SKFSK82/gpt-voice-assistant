@@ -1,0 +1,10 @@
+venv
+venv-combo
+.env
+*.pyc
+__pycache__
+data
+trained_models
+*.log
+.DS_Store
+chroma_db_persistence
